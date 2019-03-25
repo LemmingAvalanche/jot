@@ -1,5 +1,8 @@
 #!/usr/bin/env perl
 
+use strict;
+use warnings;
+
 my constant $temp_filename = "/tmp/jot-" . time();
 my $editor = $ENV{EDITOR} || "vim";
 system $editor => $temp_filename;
