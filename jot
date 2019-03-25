@@ -6,3 +6,15 @@ use warnings;
 my constant $temp_filename = "/tmp/jot-" . time();
 my $editor = $ENV{EDITOR} || "vim";
 system $editor => $temp_filename;
+
+my $contents = `cat $temp_filename`;
+
+my $contents_with_separator = $contents . "\f\n";
+
+`mkdir -p ~/jot`;
+`touch ~/jot/jot`;
+
+open(my $fh, '>> :encoding(UTF-8)', '/home/kristoffer/jot/jot')
+    or die "Error: couldn’t open file.";
+say $fh $contents_with_separator;
+close $fh;
