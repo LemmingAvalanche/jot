@@ -13,12 +13,11 @@ my $contents = `cat $temp_filename`;
 my $contents_with_separator = $contents . "\f\n";
 
 my constant $jot_dir = "$home_dir/jot";
-my constant $jot_file = "$jot_dir/jot";
-
 `mkdir -p $jot_dir`;
-`touch $jot_file`;
+chdir "$jot_dir";
+`touch $jot_dir/jot`;
 
-open(my $fh, '>> :encoding(UTF-8)', "$jot_file")
+open(my $fh, '>> :encoding(UTF-8)', "./jot")
     or die "Error: couldn’t open file.";
 say $fh $contents_with_separator;
 close $fh;
