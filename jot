@@ -18,6 +18,6 @@ chdir "$jot_dir";
 `touch $jot_dir/jot`;
 
 open(my $fh, '>> :encoding(UTF-8)', "./jot")
-    or die "Error: couldn’t open file.";
+    or die "jot: error: couldn’t open file.";
 say $fh $contents_with_separator;
 close $fh;
