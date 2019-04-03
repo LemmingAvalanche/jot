@@ -24,8 +24,3 @@ close $fh;
 
 # TODO for future use:
 #     git diff --unified=0 | tail -n +6 | perl -pe 's/^\+//'
-#
-# Alternatively (probably better):
-#
-#     git difftool -y \
-#         --extcmd="diff --changed-group-format='%>' --unchanged-group-format=''"
