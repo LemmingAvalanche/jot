@@ -21,6 +21,3 @@ open(my $fh, '>> :encoding(UTF-8)', "./jot")
     or die "Error: couldn’t open file.";
 say $fh $contents_with_separator;
 close $fh;
-
-# TODO for future use:
-#     git diff --unified=0 | tail -n +6 | perl -pe 's/^\+//'
