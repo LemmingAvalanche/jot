@@ -11,6 +11,8 @@ if (not defined $pop) {
     add_jot();
 } elsif ($pop ne "pop") {
     die "jot: error: unknown argument “$pop”";
+} else {
+    pop_jot();
 }
 
 sub add_jot {
@@ -33,3 +35,19 @@ sub add_jot {
     say $fh $contents_with_separator;
     close $fh;
 };
+
+# Pop the last note and store it in the archive.
+sub pop_jot {
+    my $jot = "$ENV{HOME}/jot/jot";
+    my $archive = "$ENV{HOME}/jot/archive";
+    my $last_note = `fft-tail-pop 1 $jot`;
+    `touch $archive`;
+    open(my $fh, '>> :encoding(UTF-8)', "$archive")
+        or die "jot: error: couldn’t open archive file for writing";
+
+    say $fh $last_note;
+    close $fh;
+    # Strip the form feed (FF) before printing.
+    my $last_note_print = `echo "$last_note" | fft-to-txt`;
+    say $last_note_print;
+}
