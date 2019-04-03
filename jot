@@ -3,6 +3,13 @@
 use strict;
 use warnings;
 
+my ($pop) = @ARGV;
+
+# No argument means that a note is to be added.
+if (not defined $pop) {
+    add_jot();
+}
+
 sub add_jot {
     my constant $temp_filename = "/tmp/jot-" . time();
     my constant $home_dir = $ENV{"HOME"};
