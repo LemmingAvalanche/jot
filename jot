@@ -3,21 +3,23 @@
 use strict;
 use warnings;
 
-my constant $temp_filename = "/tmp/jot-" . time();
-my constant $home_dir = $ENV{"HOME"};
-my $editor = $ENV{EDITOR} || "vim";
-system $editor => $temp_filename;
+sub add_jot {
+    my constant $temp_filename = "/tmp/jot-" . time();
+    my constant $home_dir = $ENV{"HOME"};
+    my $editor = $ENV{EDITOR} || "vim";
+    system $editor => $temp_filename;
 
-my $contents = `cat $temp_filename`;
+    my $contents = `cat $temp_filename`;
 
-my $contents_with_separator = $contents . "\f\n";
+    my $contents_with_separator = $contents . "\f\n";
 
-my constant $jot_dir = "$home_dir/jot";
-`mkdir -p $jot_dir`;
-chdir "$jot_dir";
-`touch $jot_dir/jot`;
+    my constant $jot_dir = "$home_dir/jot";
+    `mkdir -p $jot_dir`;
+    chdir "$jot_dir";
+    `touch $jot_dir/jot`;
 
-open(my $fh, '>> :encoding(UTF-8)', "./jot")
-    or die "jot: error: couldn’t open file.";
-say $fh $contents_with_separator;
-close $fh;
+    open(my $fh, '>> :encoding(UTF-8)', "./jot")
+        or die "jot: error: couldn’t open file.";
+    say $fh $contents_with_separator;
+    close $fh;
+};
