@@ -8,6 +8,8 @@ my ($pop) = @ARGV;
 # No argument means that a note is to be added.
 if (not defined $pop) {
     add_jot();
+} elsif ($pop ne "pop") {
+    die "jot: error: unknown argument “$pop”";
 }
 
 sub add_jot {
